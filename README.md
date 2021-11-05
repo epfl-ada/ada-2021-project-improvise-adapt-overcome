@@ -13,10 +13,11 @@ interesting conclusions.
 
 ## Research questions
 
-- Are there any newspapers that reports on similar stories ?
-- Is someone regularly interviewed by some journals but not others ?
-- Do newspapers cite local experts ?
-- If there are groups of news outlets, what attributes define them ?
+- Can we identify groups in Quotebank publishers and what defines these groups ?
+    - Are there any newspapers that reports on similar stories ?
+    - Is someone regularly interviewed by some journals but not others ?
+    - Do newspapers cite local experts ?
+    - If there are groups of news outlets, what attributes define them ?
 
 ## Additional datasets
 
@@ -50,3 +51,19 @@ Team preferences:
 - Any tools to do community detection ?
 - Concerns on feasibility ?
 
+## Ideas
+
+- Clustering methods:
+    - Cluster based on quotation graph
+    - Cluster based on quotation vectors
+
+- Find descriptors for each group from these features:
+    - Newspaper features
+        - Topic (politics, sports, ...)
+        - Location (country, state, ...)
+    - Quotes (keywords, topic modeling, tone)
+    - Speaker features extracted from wiki data
+        - Occupation
+        - Age, sex, ...
+        - Location
+        - 
