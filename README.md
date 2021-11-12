@@ -33,10 +33,13 @@ interviewees, owner, size, focus, etc.
 
 ## Notebooks
 
+We explore two different ways to identify communities : using vector based methods and using network based methods. 
+
 1. Wikidata URL<->News agency id extraction: `src/wikidata-handling.ipynb` 
-2. Erwan
-3. Sylvain
-4. Describing quotes using LDA
+2. analyse, transform and clean quotesbanks: `src/handling_quotes_bank.ipynb`
+3. network community detections: `src/community_detection.ipynb`
+4. Sylvain
+5. Describing quotes using LDA
 
 ## Data story outline
 
