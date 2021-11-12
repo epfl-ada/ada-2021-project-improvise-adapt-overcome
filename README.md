@@ -25,7 +25,7 @@ interviewees, owner, size, focus, etc.
 
 ## Methods
 
-- Graph community detection (Louvain's method)
+- Graph community detection (modularity based methods)
 - Kmeans
 - DBScan
 - Page rank
