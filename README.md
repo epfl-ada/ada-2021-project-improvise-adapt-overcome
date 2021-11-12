@@ -36,7 +36,7 @@ interviewees, owner, size, focus, etc.
 1. Wikidata URL<->News agency id extraction: `src/wikidata-handling.ipynb` 
 2. Erwan
 3. Sylvain
-4. Julian
+4. Describing quotes using LDA
 
 ## Data story outline
 
