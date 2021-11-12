@@ -33,13 +33,20 @@ interviewees, owner, size, focus, etc.
 
 ## Notebooks
 
-We explore two different ways to identify communities : using vector based methods and using network based methods. 
+We explore two different ways to identify communities : using vector based
+methods and using network based methods. Our pipeline is split in multiple
+notebooks:
 
-1. Wikidata URL<->News agency id extraction: `src/wikidata-handling.ipynb` 
-2. analyse, transform and clean quotesbanks: `src/handling_quotes_bank.ipynb`
-3. network community detection: `src/community_detection.ipynb`
-4. Sylvain
-5. Describing quotes using LDA
+1. Wikidata URL<->News agency id extraction:
+   [`src/wikidata-handling.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/wikidata-handling.ipynb)
+2. Analysis, transformation and cleaning of Quotebank:
+   [`src/handling_quotes_bank.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/handling_quotes_bank.ipynb)
+3. Network community detection:
+   [`src/community_detection.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/community_detection.ipynb)
+4. Clustering methods exploration:
+   [`src/clustering.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/clustering.ipynb)
+5. Describing quotes using LDA:
+   [`src/lda.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/lda.ipynb)
 
 ## Data story outline
 
