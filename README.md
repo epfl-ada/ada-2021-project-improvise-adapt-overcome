@@ -2,68 +2,69 @@
 
 ## Title
 
-Communities in news outlets, reporters and speakers
+Properties of communities in news outlets in Quotebank
 
 ## Abstract
 
-The goal of the project is to highlight relationships between newspapers, journalists and interviewees.
-More precisely, we want to construct a graph between these entities based on different factors:
-interviewed, cited, stories reported on, ... This will enable us to detect communities and draw
-interesting conclusions.
+The goal of the project is to highlight relationships between newspapers,
+journalists and interviewees.  More precisely, we want to cluster media outlets
+based on who they cite. We will then analyze the attributes of the resulting communities
+using external datasets. Some of the factor we want to examine are geolocation,
+interviewees, owner, size, focus, etc.
 
 ## Research questions
 
-- Can we identify groups in Quotebank publishers and what defines these groups ?
-    - Are there any newspapers that reports on similar stories ?
-    - Is someone regularly interviewed by some journals but not others ?
-    - Do newspapers cite local experts ?
-    - If there are groups of news outlets, what attributes define them ?
+- Can we identify groups in Quotebank publishers using the people they cite ? 
+- If there are such groups, what attributes define them ?
 
 ## Additional datasets
 
-- Wikidata, for geographical information about Quotebank's entities
-- A dataset of connecting words, to filter them out when trying to extract the topic out of a quote
+- Wikidata, for publishers and speaker information 
+- A dataset of connecting words, to filter them out when trying to extract the
+  topic out of a quote
 
 ## Methods
 
-- Graph community detection
-- Graph database (?)
+- Graph community detection (Louvain's method)
+- Kmeans
+- DBScan
+- Page rank
+- Latent Dirichlet Allocation (topic extraction)
+
+## Notebooks
+
+1. Luca
+2. Erwan
+3. Sylvain
+4. Julian
+
+## Data story outline
+
+The main idea is to present the different clusters that we have identified and
+what defines them. We'll have a main visualization of our clusters, followed by
+detailed analysis of some individual clusters. We would like our main
+visualization to be interactive: the user should be able to click on clusters
+and examine their properties.
 
 ## Timeline
 
-- [12.11] Start the project
-- [19.11] Create graph model
-- [26.11] Community detection
-- [10.12] Visualizations/data story
+- [12.11] Merge pipeline stages, make sure full pipeline works correctly
+          Create a small library of useful functions for the project
+- [19.11] Explore and analyze the initial results, and dig where interesting things happen
+- [03.12] Start working on data story and possible visualizations
+- [10.12] Finalize data story and create blog post
 
 ## Team organization
 
-Team preferences:
-
-- Julian: experimenting with page rank
-- Luca: visualisations and geographic analysis
-- Sylvain: tooling, technologies
+Team assignments:
+- Erwan: data cleaning, clustering using graphs
+- Julian: working on page rank, topic extraction
+- Luca: preparing additional datasets and visualisation 
+- Sylvain: clustering (Kmeans, DBScan, ...) and blog
 
 ## Questions for TAs
 
-- Office hours ? Are we just supposed to show up Friday ? How much time do we have ?
-- Graph creation: what is the correct method ?
-- Any tools to do community detection ?
-- Concerns on feasibility ?
+- Using pagerank: how to design the graph on which to apply it ? Is it useful for our goal ?
+- Interactive visualization: any libraries suited for the task ?
+- Do you have any concerns on feasibility ?
 
-## Ideas
-
-- Clustering methods:
-    - Cluster based on quotation graph
-    - Cluster based on quotation vectors
-
-- Find descriptors for each group from these features:
-    - Newspaper features
-        - Topic (politics, sports, ...)
-        - Location (country, state, ...)
-    - Quotes (keywords, topic modeling, tone)
-    - Speaker features extracted from wiki data
-        - Occupation
-        - Age, sex, ...
-        - Location
-        - 
