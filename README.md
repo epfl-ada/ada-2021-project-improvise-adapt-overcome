@@ -37,7 +37,7 @@ We explore two different ways to identify communities : using vector based metho
 
 1. Wikidata URL<->News agency id extraction: `src/wikidata-handling.ipynb` 
 2. analyse, transform and clean quotesbanks: `src/handling_quotes_bank.ipynb`
-3. network community detections: `src/community_detection.ipynb`
+3. network community detection: `src/community_detection.ipynb`
 4. Sylvain
 5. Describing quotes using LDA
 
