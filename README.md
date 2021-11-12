@@ -33,7 +33,7 @@ interviewees, owner, size, focus, etc.
 
 ## Notebooks
 
-1. Luca
+1. Wikidata URL<->News agency id extraction: `src/wikidata-handling.ipynb` 
 2. Erwan
 3. Sylvain
 4. Julian
