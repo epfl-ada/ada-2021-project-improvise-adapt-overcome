@@ -5,6 +5,12 @@ data/
 # Created by https://www.toptal.com/developers/gitignore/api/jupyternotebooks,linux,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=jupyternotebooks,linux,visualstudiocode
 
+### Jekyll ###
+website/_site/
+website/.sass-cache/
+website/.jekyll-cache/
+website/.jekyll-metadata
+
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
