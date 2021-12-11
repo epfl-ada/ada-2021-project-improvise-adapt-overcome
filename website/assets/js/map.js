@@ -1,7 +1,15 @@
-const COLORMAP = "gist_rainbow";
+const COLORMAP = "turbo";
 const UNCLUSTERED_COLOR = "#000000";
 const CIRLE_RADIUS = 5000;
 
+/* ==============================================================
+ * Main rendering functions
+ * ============================================================== */
+
+/**
+ * Main map rendering function, called from `main.js` with the `cluster_locations.csv` data as argument
+ * @param {Array<{cluster_id: string, journal: string, lat: number, lon: number }>} clusters
+ */
 function renderMap(clusters) {
   // Cast all clusters to integers
   for (let i = 0; i < clusters.length; i++) {
@@ -15,20 +23,115 @@ function renderMap(clusters) {
   const n_clusters = cluster_ids.filter((x) => x != -1).length;
 
   // Create marker icons for each cluster_id
-  icons = {};
+  const icons = {};
   for (let cluster_id of cluster_ids) {
     icons[cluster_id] = createIcon(cluster_id, n_clusters);
   }
 
   // Group cluster markers by cluster_id
-  const markers = clusters.reduce(
-    (markers, x) => createMarker(x, n_clusters, markers, icons),
-    {}
-  );
+  const markers = clusters.reduce((mks, c) => createMarker(c, mks, icons), {});
 
-  const map = initMap(n_clusters, markers);
+  initMap(n_clusters, markers);
 }
 
+/**
+ * Initialises map with its base tiling layers. Adds markers as a layer per `cluster_id`
+ * @param {int} n_clusters Total number of clusters excluding "-1"
+ * @param {Object<string, L.marker>} markers Dictionary mapping `cluster_id` to a list of `L.marker`
+ * @returns {L.map} a new, configured, map object
+ */
+function initMap(n_clusters, markers) {
+  // Create base layers
+  const baseLayer = new L.StamenTileLayer("toner");
+  const lightLayer = new L.StamenTileLayer("terrain");
+
+  // Generate marker aggregation layer and add each cluster as a sub layer
+  const clusterLayers = {};
+  const markerAggerator = L.markerClusterGroup({
+    iconCreateFunction: (x) => clusterIconMaker(x, n_clusters),
+  });
+
+  for (let cluster_id in markers) {
+    const cluster = markers[cluster_id];
+    const layer = L.featureGroup.subGroup(markerAggerator, cluster);
+    clusterLayers[cluster_id] = layer;
+  }
+
+  // Create map and add layers
+  const map = new L.Map("map", {
+    center: new L.LatLng(46.5191, 6.5668),
+    zoom: 7,
+    layers: [baseLayer, markerAggerator, ...Object.values(clusterLayers)],
+  });
+
+  L.control
+    .layers({ Base: baseLayer, Terrain: lightLayer }, clusterLayers)
+    .addTo(map);
+
+  return map;
+}
+
+/* ==============================================================
+ * Interactive components
+ * ============================================================== */
+
+/**
+ * Creates a Leaflet marker object for the journal entry. Adds this new marker to the `markers` dictionary. Returns the modified dictionary
+ * Markers are created with a custom color based on `cluster_id`, and have a popup displaying their journal name and cluster_id
+ * Only creates a marker if the latitude and longitue exist
+ * @param {cluster_id: number, journal: string, lat: number, lon: number } journalEntry the transformed journal entry obtained in the data file
+ * @param {Object<string, L.marker>} markers Dictionary mapping `cluster_id` to a list of `L.marker`
+ * @param {Object<string, L.divIcon>} icons Dictionary mapping `cluster_id` to a list of `L.divIcon`
+ * @returns {Object<string, L.marker>} the old `markers` with `journalEntry` added to its appropriate dictionary entry
+ */
+function createMarker({ cluster_id, journal, lat, lon }, markers, icons) {
+  // Only allow if lat/lon are not null, undefined, or NaN
+  if ((lat || lat === 0) && (lon || lon === 0)) {
+    // Create circle object
+    marker = L.marker([lat, lon], {
+      icon: icons[cluster_id],
+      title: journal,
+    }).bindPopup(journal);
+
+    marker.cluster_id = cluster_id;
+
+    // Add to marker map
+    if (!(cluster_id in markers)) {
+      markers[cluster_id] = [];
+    }
+    markers[cluster_id].push(marker);
+  }
+
+  return markers;
+}
+
+/* ==============================================================
+ * Visual components
+ * ============================================================== */
+
+/**
+ * Maps a cluster_id to a given color on the color map.
+ * "-1" is always mapped to black
+ * @param {int} cluster_id : ID of the cluster
+ * @param {int} n_clusters : Total number of clusters excluding "-1"
+ * @returns {string} a CSS "rgb(r,g,b)" string
+ */
+function clusterToRGB(cluster_id, n_clusters) {
+  if (cluster_id < 0) {
+    return UNCLUSTERED_COLOR;
+  }
+
+  [r, g, b] = evaluate_cmap(cluster_id / n_clusters, COLORMAP, false);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+/**
+ * Creates a Leaflet div icon to represent a journal marker
+ * The color of the icon is based on the cluster_id
+ * @param {int} cluster_id : ID of the cluster
+ * @param {int} n_clusters : Total number of clusters excluding "-1"
+ * @returns {Leaflet.divIcon} the new Leaflet.divIcon for this journal marker
+ */
 function createIcon(cluster_id, n_clusters) {
   const markerHtmlStyles = `
   background-color: ${clusterToRGB(cluster_id, n_clusters)};
@@ -52,33 +155,12 @@ function createIcon(cluster_id, n_clusters) {
 }
 
 /**
- * Initialise Leafelet map object and return it
+ * Creates a Leaflet div icon to represent a cluster of journal markers
+ * The color of the icon is based on the most frequent cluster_id
+ * @param {int} cluster_id : ID of the cluster
+ * @param {int} n_clusters : Total number of clusters excluding "-1"
+ * @returns the new Leaflet.divIcon
  */
-function initMap(n_clusters, markers) {
-  const baseLayer = new L.StamenTileLayer("toner");
-
-  // Add all markers to clustering library
-  const clusterGroup = L.markerClusterGroup({
-    iconCreateFunction: (x) => clusterIconMaker(x, n_clusters),
-  });
-
-  for (let cluster in markers) {
-    markers[cluster].forEach((x) => clusterGroup.addLayer(x));
-  }
-
-  // Create map and add layers
-  const map = new L.Map("map", {
-    center: new L.LatLng(46.5191, 6.5668),
-    zoom: 7,
-    layers: [baseLayer, clusterGroup],
-  });
-
-  L.control.layers({ base: baseLayer }, { markers: clusterGroup }).addTo(map);
-
-  // Add spiderfier module
-  return map;
-}
-
 function clusterIconMaker(cluster, n_clusters) {
   // Find most frequent cluster_id in marker cluster
 
@@ -134,38 +216,4 @@ function clusterIconMaker(cluster, n_clusters) {
         <div style="${innerTextStyles}">${cluster.getChildCount()}</div>
       </div>`,
   });
-}
-
-function createMarker(
-  { cluster_id, journal, lat, lon },
-  n_clusters,
-  markers,
-  icons
-) {
-  if (lat && lon) {
-    // Create circle object
-    marker = L.marker([lat, lon], {
-      icon: icons[cluster_id],
-      title: journal,
-    }).bindPopup(journal);
-
-    marker.cluster_id = cluster_id;
-
-    // Add to markers map
-    if (!(cluster_id in markers)) {
-      markers[cluster_id] = [];
-    }
-    markers[cluster_id].push(marker);
-  }
-
-  return markers;
-}
-
-function clusterToRGB(cluster_id, n_clusters) {
-  if (cluster_id < 0) {
-    return UNCLUSTERED_COLOR;
-  }
-
-  [r, g, b] = evaluate_cmap(cluster_id / n_clusters, COLORMAP, false);
-  return `rgb(${r}, ${g}, ${b})`;
 }
