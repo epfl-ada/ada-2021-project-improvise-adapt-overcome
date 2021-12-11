@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include head-custom.html %}
+        <script src="{{ '/assets/js/lib/three.js?v=' | append: site.github.build_revision | relative_url' }}"></script>
+        <script src="{{ '/assets/js/clusters.js?v=' | append: site.github.build_revision | relative_url' }}"></script>
+    </head>
+    <body>
+        <div id='clusters-visualization' onload='drawClusters()'></div>
+        <p>
+        </p>
+    </body>
+</html>
