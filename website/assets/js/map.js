@@ -1,6 +1,7 @@
-const COLORMAP = "turbo";
-const UNCLUSTERED_COLOR = "#000000";
+const COLORMAP = "hsv";
+const UNCLUSTERED_COLOR = "#888888";
 const CIRLE_RADIUS = 5000;
+const NOCLUSTER_ID = "No cluster";
 
 /* ==============================================================
  * Main rendering functions
@@ -11,16 +12,21 @@ const CIRLE_RADIUS = 5000;
  * @param {Array<{cluster_id: string, journal: string, lat: number, lon: number }>} clusters
  */
 function renderMap(clusters) {
-  // Cast all clusters to integers
+  // Initial preprocessing, cast cluster_id to integer or
   for (let i = 0; i < clusters.length; i++) {
-    clusters[i].cluster_id = Math.round(clusters[i].cluster_id);
+    const cid =
+      clusters[i].cluster_id == -1
+        ? NOCLUSTER_ID
+        : Math.round(clusters[i].cluster_id);
+
+    clusters[i].cluster_id = `${cid}`;
   }
 
-  // Compute number of clusters, not including -1
+  // Compute number of clusters, not including unclustered points
   const cluster_ids = Array.from(
     clusters.reduce((acc, x) => acc.add(x.cluster_id), new Set())
   );
-  const n_clusters = cluster_ids.filter((x) => x != -1).length;
+  const n_clusters = cluster_ids.filter((x) => x != NOCLUSTER_ID).length;
 
   // Create marker icons for each cluster_id
   const icons = {};
@@ -36,9 +42,9 @@ function renderMap(clusters) {
 
 /**
  * Initialises map with its base tiling layers. Adds markers as a layer per `cluster_id`
- * @param {int} n_clusters Total number of clusters excluding "-1"
+ * @param {number} n_clusters Total number of clusters excluding unclustered points
  * @param {Object<string, L.marker>} markers Dictionary mapping `cluster_id` to a list of `L.marker`
- * @returns {L.map} a new, configured, map object
+ * @returns {Leaflet.map} a new, configured, map object
  */
 function initMap(n_clusters, markers) {
   // Create base layers
@@ -79,7 +85,7 @@ function initMap(n_clusters, markers) {
  * Creates a Leaflet marker object for the journal entry. Adds this new marker to the `markers` dictionary. Returns the modified dictionary
  * Markers are created with a custom color based on `cluster_id`, and have a popup displaying their journal name and cluster_id
  * Only creates a marker if the latitude and longitue exist
- * @param {cluster_id: number, journal: string, lat: number, lon: number } journalEntry the transformed journal entry obtained in the data file
+ * @param {cluster_id: string, journal: string, lat: number, lon: number } journalEntry the transformed journal entry obtained in the data file
  * @param {Object<string, L.marker>} markers Dictionary mapping `cluster_id` to a list of `L.marker`
  * @param {Object<string, L.divIcon>} icons Dictionary mapping `cluster_id` to a list of `L.divIcon`
  * @returns {Object<string, L.marker>} the old `markers` with `journalEntry` added to its appropriate dictionary entry
@@ -87,12 +93,13 @@ function initMap(n_clusters, markers) {
 function createMarker({ cluster_id, journal, lat, lon }, markers, icons) {
   // Only allow if lat/lon are not null, undefined, or NaN
   if ((lat || lat === 0) && (lon || lon === 0)) {
-    // Create circle object
-    marker = L.marker([lat, lon], {
+    // Create marker object
+    const marker = L.marker([lat, lon], {
       icon: icons[cluster_id],
       title: journal,
-    }).bindPopup(journal);
+    }).bindPopup(createPopup(cluster_id, journal));
 
+    // Save cluster_id in marker for future use
     marker.cluster_id = cluster_id;
 
     // Add to marker map
@@ -111,13 +118,13 @@ function createMarker({ cluster_id, journal, lat, lon }, markers, icons) {
 
 /**
  * Maps a cluster_id to a given color on the color map.
- * "-1" is always mapped to black
- * @param {int} cluster_id : ID of the cluster
- * @param {int} n_clusters : Total number of clusters excluding "-1"
+ * Unclustered points are always mapped to a dark color
+ * @param {string} cluster_id ID of the cluster
+ * @param {number} n_clusters Total number of clusters excluding unclustered points
  * @returns {string} a CSS "rgb(r,g,b)" string
  */
 function clusterToRGB(cluster_id, n_clusters) {
-  if (cluster_id < 0) {
+  if (cluster_id == NOCLUSTER_ID) {
     return UNCLUSTERED_COLOR;
   }
 
@@ -126,10 +133,28 @@ function clusterToRGB(cluster_id, n_clusters) {
 }
 
 /**
+ * Creates the HTML popup for a journal marker
+ * @param {string} cluster_id ID of the cluster for that journal
+ * @param {string} journal URL of the journal
+ * @returns {Leaflet.popup}
+ */
+function createPopup(cluster_id, journal) {
+  const popupContent = `<div style="padding-top: 10px;">
+      <strong>Journal:</strong> ${journal}</br>
+      <strong>Cluster:</strong> <em>${cluster_id}</em>
+    </div>`;
+
+  const popup = L.popup();
+  popup.setContent(popupContent);
+
+  return popup;
+}
+
+/**
  * Creates a Leaflet div icon to represent a journal marker
  * The color of the icon is based on the cluster_id
- * @param {int} cluster_id : ID of the cluster
- * @param {int} n_clusters : Total number of clusters excluding "-1"
+ * @param {string} cluster_id : ID of the cluster
+ * @param {number} n_clusters : Total number of clusters excluding unclustered points
  * @returns {Leaflet.divIcon} the new Leaflet.divIcon for this journal marker
  */
 function createIcon(cluster_id, n_clusters) {
@@ -149,8 +174,8 @@ function createIcon(cluster_id, n_clusters) {
     className: `cluster-${cluster_id}-icon`,
     iconAnchor: [0, 24],
     labelAnchor: [-6, 0],
-    popupAnchor: [0, -36],
-    html: `<span style="${markerHtmlStyles}" />`,
+    popupAnchor: [0, -20],
+    html: `<div style="${markerHtmlStyles}"></div>`,
   });
 }
 
@@ -158,7 +183,7 @@ function createIcon(cluster_id, n_clusters) {
  * Creates a Leaflet div icon to represent a cluster of journal markers
  * The color of the icon is based on the most frequent cluster_id
  * @param {int} cluster_id : ID of the cluster
- * @param {int} n_clusters : Total number of clusters excluding "-1"
+ * @param {int} n_clusters : Total number of clusters excluding unclustered points
  * @returns the new Leaflet.divIcon
  */
 function clusterIconMaker(cluster, n_clusters) {
@@ -173,13 +198,6 @@ function clusterIconMaker(cluster, n_clusters) {
   const cluster_id_most_freq = Object.keys(counts).reduce(
     (iMax, i) => (counts[i] > counts[iMax] ? i : iMax),
     Object.keys(counts)[0]
-  );
-  console.log(
-    cluster.getChildCount(),
-    cluster.getAllChildMarkers(),
-    counts,
-    cluster_id_most_freq,
-    n_clusters
   );
 
   // Generate icon corresponding to mode of cluster_id
