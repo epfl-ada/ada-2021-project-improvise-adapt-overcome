@@ -6,3 +6,9 @@
 #map {
     height: 500px;
 }
+
+#clusters-visualization > canvas {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2px;
+}
