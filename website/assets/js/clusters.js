@@ -38,12 +38,14 @@ export function renderClusters(data) {
     document.getElementById("clusters-visualization").appendChild( renderer.domElement );
     
     const controls = new OrbitControls( camera, renderer.domElement );
+    const sprite = new THREE.TextureLoader().load('/assets/img/dot.png');
 
     var renderCluster = function(cluster_id, newspapers) {
         const cluster_id_int = parseInt(cluster_id);
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(newspapers.flatMap(np => np.position));
-        const material = new THREE.PointsMaterial({color: new THREE.Color(clusterToRGB(cluster_id_int, cluster_count)), size: (cluster_id_int == -1) ? 0.01 : 0.05});
+        const material = new THREE.PointsMaterial({map: sprite, alphaTest: 0.5, transparent: true, size: (cluster_id_int == -1) ? 0.00 : 0.1});
+        material.color.set(clusterToRGB(cluster_id_int, cluster_count));
         const points = new THREE.Points(geometry, material);
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         points.scale.set(4, 4, 4);
