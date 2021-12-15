@@ -1,4 +1,8 @@
-import { highlightOn, highlightOff } from "/assets/js/clusters.js";
+import {
+  highlightOn,
+  highlightOff,
+  clusterToRGB,
+} from "/assets/js/clusters.js";
 
 const SELECTOR_ID = "panel-selector";
 const BTN_CLASS = "btn";
@@ -11,21 +15,24 @@ export function initPanel(clusters) {
   const panelSelector = document.getElementById(SELECTOR_ID);
 
   for (let cluster of clusters) {
-    const button = makeButton(cluster);
+    const button = makeButton(cluster, clusters.length);
     panelSelector.appendChild(button);
   }
 }
 
-function makeButton(cluster) {
+function makeButton(cluster, n_clusters) {
   const button = document.createElement("button");
+  const color = clusterToRGB(cluster.cluster_id, n_clusters);
   button.setAttribute("class", BTN_CLASS);
   button.innerHTML = cluster.name;
+
+  button.style = `background-color: ${color}`;
 
   button.onclick = () => {
     if (selected_button_id !== cluster.cluster_id) {
       if (selected_button) {
         selected_button.setAttribute("class", BTN_CLASS);
-        highlightOff(selected_button_id);
+        highlightOff();
       }
 
       button.setAttribute("class", BTN_SELECTED_CLASS);
@@ -36,7 +43,7 @@ function makeButton(cluster) {
       highlightOn(selected_button_id);
     } else {
       button.setAttribute("class", BTN_CLASS);
-      highlightOff(cluster.cluster_id);
+      highlightOff();
 
       selected_button_id = null;
       selected_button = null;
@@ -44,11 +51,4 @@ function makeButton(cluster) {
   };
 
   return button;
-}
-
-function makeCluster(id) {
-  return {
-    cluster_id: id,
-    name: `Health and science ${id}`,
-  };
 }

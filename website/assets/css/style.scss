@@ -52,7 +52,7 @@ $panel-height: 30rem;
 $selection-color: grey;
 
 #panel-selector > .btn{
-    color: $body-text-color;
+    color:black;
     border-color: $selection-color;
     background-color: none;
     margin: 0;
@@ -61,7 +61,7 @@ $selection-color: grey;
 
 #panel-selector > .btn-selected {
     background-color: $selection-color;
-    color: white;
+    color: black;
     opacity: 1;
 }
 
