@@ -1,6 +1,12 @@
-import * as THREE from 'https://cdn.skypack.dev/pin/three@v0.135.0-pjGUcRG9Xt70OdXl97VF/mode=imports,min/optimized/three.js';
-import { OrbitControls } from 'https://cdn.skypack.dev/three@0.135.0/examples/jsm/controls/OrbitControls.js';
+import * as THREE from '/assets/js/lib/three.module.js';
+import { OrbitControls } from '/assets/js/lib/OrbitControls.js';
 import { evaluate_cmap } from '/assets/js/lib/js-colormaps.module.js'
+
+const width = 800;
+const height = 800;
+
+let renderer, scene, camera, controls;
+let clustersMap;
 
 function clusterToRGB(cluster_id, n_clusters) {
     if (cluster_id == -1) {
@@ -18,7 +24,7 @@ function groupBy(xs, key) {
   }, {});
 }
 
-export function renderClusters(data) {
+function renderClusters(data, element_id) {
     // CSV processing
     const newspapers = data.map(p => ({
         name: p.journal,
@@ -26,50 +32,74 @@ export function renderClusters(data) {
         position: [parseFloat(p.x2), parseFloat(p.y2), parseFloat(p.z2)]
     }));
     const cluster_count = new Set(newspapers.map(p => p.cluster_id)).size - data.includes(-1);
-    const clusters = groupBy(newspapers, 'cluster_id')
-
+    const grouped = groupBy(newspapers, 'cluster_id')
     
     // Scene
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
 
-    const renderer = new THREE.WebGLRenderer({alpha: true});
-    renderer.setSize(800, 800);
-    document.getElementById("clusters-visualization").appendChild( renderer.domElement );
+    renderer = new THREE.WebGLRenderer({alpha: true});
+    renderer.setSize(width, height);
+    document.getElementById(element_id).appendChild( renderer.domElement );
     
-    const controls = new OrbitControls( camera, renderer.domElement );
+    controls = new OrbitControls( camera, renderer.domElement );
+
+    // Clusters
     const sprite = new THREE.TextureLoader().load('/assets/img/dot.png');
 
     var renderCluster = function(cluster_id, newspapers) {
         const cluster_id_int = parseInt(cluster_id);
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(newspapers.flatMap(np => np.position));
-        const material = new THREE.PointsMaterial({map: sprite, alphaTest: 0.5, transparent: true, size: (cluster_id_int == -1) ? 0.00 : 0.1});
+        const material = new THREE.PointsMaterial({
+            map: sprite,
+            alphaTest: 0.1,
+            transparent: true,
+            size: 0.1
+        });
         material.color.set(clusterToRGB(cluster_id_int, cluster_count));
         const points = new THREE.Points(geometry, material);
+        points.name = "Cluster " + cluster_id;
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         points.scale.set(4, 4, 4);
-        return points;
+        return [cluster_id_int, points];
     }
     
-    const all_points = Object.entries(clusters).map(group => renderCluster(...group));
-    all_points.forEach(points => scene.add(points));
+    clustersMap = new Map(Object.entries(grouped)
+        .filter(group => group[0] != -1)
+        .map(group => renderCluster(...group)));
+
+    Array.from(clustersMap.values()).forEach(cluster => scene.add(cluster));
 
     camera.position.z = 5;
-    function animate() {
-        requestAnimationFrame( animate );
-        controls.update();
-        renderer.render(scene, camera);
-    }
-
     animate();
 }
 
-function onWindowResize() {
+function highlightOn(cluster_id) {
+    for (const [id, points] of clustersMap.entries()) {
+        if (id != cluster_id) {
+            points.material.opacity = 0.2;
+            points.material.needsUpdate = true;
+        }
+    }
+}
 
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize( window.innerWidth, window.innerHeight );
+function highlightOff() {
+    for (const points in clustersMap.values()) {
+        points.material.opacity = 1;
+        points.material.needsUpdate = true;
+    }
 
 }
+
+function animate() {
+    requestAnimationFrame( animate );
+    controls.update();
+    render();
+}
+
+function render() {
+    renderer.render(scene, camera);
+}
+
+export { renderClusters, highlightOn, highlightOff };
