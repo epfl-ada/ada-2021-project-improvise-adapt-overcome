@@ -1,7 +1,5 @@
-//import { highlightOn, highlightOff } from "/assets/js/clusters.js";
+import { highlightOn, highlightOff } from "/assets/js/clusters.js";
 
-const highlightOn = (x) => console.log("Selecting " + x);
-const highlightOff = (x) => console.log("Unselecting " + selected_button_id);
 const SELECTOR_ID = "panel-selector";
 const BTN_CLASS = "btn";
 const BTN_SELECTED_CLASS = `${BTN_CLASS} btn-selected`;
