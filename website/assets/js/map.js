@@ -1,7 +1,7 @@
 const COLORMAP = "hsv";
 const UNCLUSTERED_COLOR = "#888888";
-const CIRLE_RADIUS = 5000;
 const NOCLUSTER_ID = "No cluster";
+const MAP_ZOOM = 5;
 
 /* ==============================================================
  * Main rendering functions
@@ -66,12 +66,14 @@ function initMap(n_clusters, markers) {
   // Create map and add layers
   const map = new L.Map("map", {
     center: new L.LatLng(46.5191, 6.5668),
-    zoom: 7,
+    zoom: MAP_ZOOM,
     layers: [baseLayer, markerAggerator, ...Object.values(clusterLayers)],
   });
 
   L.control
-    .layers({ Base: baseLayer, Terrain: lightLayer }, clusterLayers)
+    .layers({ Base: baseLayer, Terrain: lightLayer }, clusterLayers, {
+      collapsed: false,
+    })
     .addTo(map);
 
   return map;
