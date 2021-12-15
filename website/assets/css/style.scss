@@ -7,10 +7,23 @@
   height: 500px;
 }
 
-#clusters-visualization > canvas {
-  border-style: solid;
-  border-width: $module-border-width;
-  border-radius: 2px;
+#clusters-visualization {
+    display: flex;
+    width: 100%;
+}
+
+#clusters-graph {
+    flex: 3;
+}
+
+#clusters-graph > canvas {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2px;
+}
+
+#cluster-legend {
+    flex: 1;
 }
 
 /* Cluster selection panel */
@@ -57,6 +70,3 @@ $selection-color: grey;
     height: $panel-height; 
     overflow: auto;
 }
-
-
-

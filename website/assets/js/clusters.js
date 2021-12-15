@@ -39,8 +39,10 @@ function renderClusters(data, element_id) {
     camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
 
     renderer = new THREE.WebGLRenderer({alpha: true});
-    renderer.setSize(width, height);
-    document.getElementById(element_id).appendChild( renderer.domElement );
+    const parentElement = document.getElementById(element_id)
+    parentElement.appendChild( renderer.domElement );
+    const rect = parentElement.getBoundingClientRect();
+    renderer.setSize(rect.width, rect.width);
     
     controls = new OrbitControls( camera, renderer.domElement );
 
@@ -79,8 +81,10 @@ function highlightOn(cluster_id) {
     for (const [id, points] of clustersMap.entries()) {
         if (id != cluster_id) {
             points.material.opacity = 0.2;
-            points.material.needsUpdate = true;
+        } else {
+            points.material.opacity = 1;
         }
+        points.material.needsUpdate = true;
     }
 }
 
@@ -89,7 +93,6 @@ function highlightOff() {
         points.material.opacity = 1;
         points.material.needsUpdate = true;
     }
-
 }
 
 function animate() {
