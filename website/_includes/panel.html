@@ -1,0 +1,13 @@
+<div id="panel">
+    <div id="panel-selector">
+        
+    </div>
+    <div id="panel-cluster">
+        Bing bong
+    </div>
+
+    <script type="module">
+        import { initPanel } from '/assets/js/panel.js?v=';
+        initPanel({{site.data.cluster-info | jsonify }});
+    </script>
+</div>
