@@ -34,6 +34,12 @@ function makeButton(cluster) {
       selected_button = button;
 
       highlightOn(selected_button_id);
+    } else {
+      button.setAttribute("class", BTN_CLASS);
+      highlightOff(cluster.cluster_id);
+
+      selected_button_id = null;
+      selected_button = null;
     }
   };
 

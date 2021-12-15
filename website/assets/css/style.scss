@@ -43,11 +43,13 @@ $selection-color: grey;
     border-color: $selection-color;
     background-color: none;
     margin: 0;
+    opacity: 0.3;
 }
 
 #panel-selector > .btn-selected {
     background-color: $selection-color;
     color: white;
+    opacity: 1;
 }
 
 #panel-cluster {
