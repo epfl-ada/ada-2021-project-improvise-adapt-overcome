@@ -8,13 +8,13 @@ const height = 800;
 let renderer, scene, camera, controls;
 let clustersMap;
 
-function clusterToRGB(cluster_id, n_clusters) {
+function clusterToRGB(cluster_id, n_clusters, alpha = undefined) {
   if (cluster_id == -1) {
     return 0x000000;
   }
 
   const [r, g, b] = evaluate_cmap(cluster_id / n_clusters, COLORMAP, false);
-  return `rgb(${r}, ${g}, ${b})`;
+  return alpha ? `rgb(${r}, ${g}, ${b}, ${alpha})` : `rgb(${r}, ${g}, ${b})`;
 }
 
 function groupBy(xs, key) {
