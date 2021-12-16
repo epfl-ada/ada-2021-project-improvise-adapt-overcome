@@ -41,14 +41,23 @@ function makeButton(cluster, n_clusters) {
       selected_button = button;
 
       highlightOn(selected_button_id);
+      setClusterInfo(cluster);
     } else {
       button.setAttribute("class", BTN_CLASS);
       highlightOff();
 
       selected_button_id = null;
       selected_button = null;
+      removeClusterInfo();
     }
   };
 
   return button;
 }
+
+function setClusterInfo(cluster, n_clusters) {
+  const panelInfo = document.getElementById("panel-cluster");
+  console.log(cluster);
+}
+
+function removeClusterInfo() {}
