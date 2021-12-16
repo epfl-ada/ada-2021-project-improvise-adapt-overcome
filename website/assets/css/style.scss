@@ -3,6 +3,14 @@
 
 @import "jekyll-theme-cayman";
 
+.caption {
+    display: block;
+    font-style: italic;
+    font-size: 0.9rem;
+    padding: 0 5%;
+    margin: 10px 0;
+}
+
 #map {
   height: 500px;
 }
