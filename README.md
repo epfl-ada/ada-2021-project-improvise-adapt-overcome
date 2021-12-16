@@ -41,11 +41,9 @@ notebooks:
    [`src/wikidata-handling.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/wikidata-handling.ipynb)
 2. Analysis, transformation and cleaning of Quotebank:
    [`src/handling_quotes_bank.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/handling_quotes_bank.ipynb)
-3. Network community detection:
-   [`src/community_detection.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/community_detection.ipynb)
-4. Clustering methods exploration:
+3. Clustering methods exploration:
    [`src/clustering.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/clustering.ipynb)
-5. Describing quotes using LDA:
+4. Describing quotes using LDA:
    [`src/lda.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/lda.ipynb)
 
 ## Data story outline
