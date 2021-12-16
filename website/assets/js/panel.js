@@ -104,3 +104,33 @@ function makeTable(items, header, itemToString = (x) => `<td>${x}</td>`) {
 
   return `<div class="panel-table"><table>${tableItems}</table></div>`;
 }
+
+function makeFeatureImportance({ featureName, weight }, maxAbsWeight) {
+  const width = (100 * Math.abs(weight)) / maxAbsWeight;
+
+  const leftStyle = `
+    width: ${weight < 0 ? width : 0}%;
+  `;
+
+  const rightStyle = `
+    width: ${weight >= 0 ? width : 0}%;
+  `;
+
+  const leftNum = weight < 0 ? weight.toFixed(2) : "";
+  const rightNum = weight >= 0 ? weight.toFixed(2) : "";
+
+  return `
+  <div class="feature-importance">
+    <div class="fi-label">${featureName}</div>
+    <div class="feature-importance-bar">
+      <div class="feature-importance-halfbar">
+        <div class="feature-importance-progress fip-left" style="${leftStyle}"></div>
+        <div class="fip-num fip-num-right"><div>${rightNum}</div></div>
+      </div>
+      <div class="feature-importance-halfbar">
+        <div class="feature-importance-progress fip-right" style="${rightStyle}"></div>
+        <div class="fip-num fip-num-left"><div>${leftNum}</div></div>
+      </div>
+    </div>
+  </div>`;
+}
