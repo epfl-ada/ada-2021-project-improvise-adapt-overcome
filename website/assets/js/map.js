@@ -10,8 +10,9 @@ const MAP_ZOOM = 5;
 /**
  * Main map rendering function, called from `main.js` with the `cluster_locations.csv` data as argument
  * @param {Array<{cluster_id: string, journal: string, lat: number, lon: number }>} clusters
+ * @parma {}
  */
-function renderMap(clusters) {
+function renderMap(clusters, cluster_info) {
   // Initial preprocessing, cast cluster_id to integer or
   for (let i = 0; i < clusters.length; i++) {
     const cid =
@@ -22,6 +23,10 @@ function renderMap(clusters) {
     clusters[i].cluster_id = `${cid}`;
   }
 
+  const cluster_names = cluster_info.reduce((acc, { cluster_id, name }) => {
+    return { ...acc, [cluster_id]: name };
+  }, {});
+
   // Compute number of clusters, not including unclustered points
   const cluster_ids = Array.from(
     clusters.reduce((acc, x) => acc.add(x.cluster_id), new Set())
@@ -31,22 +36,23 @@ function renderMap(clusters) {
   // Create marker icons for each cluster_id
   const icons = {};
   for (let cluster_id of cluster_ids) {
-    icons[cluster_id] = createIcon(cluster_id, n_clusters);
+    icons[cluster_id] = createIcon(cluster_id, n_clusters, cluster_names);
   }
 
   // Group cluster markers by cluster_id
   const markers = clusters.reduce((mks, c) => createMarker(c, mks, icons), {});
 
-  initMap(n_clusters, markers);
+  initMap(n_clusters, markers, cluster_names);
 }
 
 /**
  * Initialises map with its base tiling layers. Adds markers as a layer per `cluster_id`
  * @param {number} n_clusters Total number of clusters excluding unclustered points
  * @param {Object<string, L.marker>} markers Dictionary mapping `cluster_id` to a list of `L.marker`
+ * @param {Object<string, string>} cluster_names Dictionary mapping `cluster_id` to its cluster name
  * @returns {Leaflet.map} a new, configured, map object
  */
-function initMap(n_clusters, markers) {
+function initMap(n_clusters, markers, cluster_names) {
   // Create base layers
   const baseLayer = new L.StamenTileLayer("toner");
   const lightLayer = new L.StamenTileLayer("terrain");
@@ -60,7 +66,8 @@ function initMap(n_clusters, markers) {
   for (let cluster_id in markers) {
     const cluster = markers[cluster_id];
     const layer = L.featureGroup.subGroup(markerAggerator, cluster);
-    clusterLayers[cluster_id] = layer;
+    clusterLayers[createLayerIcon(cluster_id, n_clusters, cluster_names)] =
+      layer;
   }
 
   // Create map and add layers
@@ -179,6 +186,36 @@ function createIcon(cluster_id, n_clusters) {
     popupAnchor: [0, -20],
     html: `<div style="${markerHtmlStyles}"></div>`,
   });
+}
+
+/**
+ * Creates an HTML icon to be displayed in the layer selection pane
+ * @param {string} cluster_id : ID of the cluster
+ * @param {number} n_clusters : Total number of clusters excluding unclustered points
+ * @param {Object<string, string>} cluster_names Dictionary mapping `cluster_id` to its cluster name
+ */
+function createLayerIcon(cluster_id, n_clusters, cluster_names) {
+  const color = clusterToRGB(cluster_id, n_clusters);
+  const circleStyle = `
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: ${color};
+    display: inline-block;
+    margin-right: 2px;
+  `;
+
+  const circle = `<div style="${circleStyle}"></div>`;
+  let cluster_name =
+    cluster_id !== NOCLUSTER_ID ? cluster_names[cluster_id] : cluster_id;
+
+  const n = 17;
+  cluster_name =
+    cluster_name.length > n
+      ? cluster_name.substr(0, n - 1) + "&hellip;"
+      : cluster_name;
+
+  return `<span>${circle}${cluster_name}</span>`;
 }
 
 /**

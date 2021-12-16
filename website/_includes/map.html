@@ -24,7 +24,7 @@
         <script src="/assets/js/lib/js-colormaps.js"></script> 
         <script src="/assets/js/map.js"></script>
     </head>
-    <body onload='renderMap({{site.data.cluster_locations | jsonify }})'>
+    <body onload='renderMap({{site.data.cluster_locations | jsonify }}, {{site.data.cluster-info | jsonify }})'>
         <div id='map'></div>
     </body>
 </html>
