@@ -3,29 +3,28 @@
     <head>
         <!-- Leaflet CSS & JS -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
         
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+        <script src="/assets/js/lib/leaflet.featuregroup.subgroup.js"></script>
 
 
         <!-- Stamen Leaflet API -->
         <script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js?v1.3.0"></script>
 
         <!-- Website theming -->
-        <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+        <link rel="stylesheet" href="/assets/css/style.css">
         {% include head-custom.html %}
 
         <!-- Document script -->
-        <script src="{{ '/assets/js/lib/js-colormaps.js?v=' | append: site.github.build_revision | relative_url'}}"></script> 
-        <script src="{{ '/assets/js/map.js?v=' | append: site.github.build_revision | relative_url' }}"></script>
+        <script src="/assets/js/lib/js-colormaps.js"></script> 
+        <script src="/assets/js/map.js"></script>
     </head>
-    <body onload='main({{site.data.cluster_locations | jsonify }}, null)'>
+    <body onload='renderMap({{site.data.cluster_locations | jsonify }})'>
         <div id='map'></div>
     </body>
 </html>

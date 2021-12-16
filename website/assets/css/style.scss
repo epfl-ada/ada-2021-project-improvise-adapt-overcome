@@ -1,8 +1,72 @@
 ---
 ---
 
-@import 'jekyll-theme-cayman';
+@import "jekyll-theme-cayman";
 
 #map {
-    height: 500px;
+  height: 500px;
+}
+
+#cluster-container {
+  width: 100%;
+  display: block;
+
+}
+
+#clusters-visualization {
+    display: flex;
+    width: 100%;
+}
+
+#clusters-graph {
+    flex: 3;
+}
+
+#clusters-graph > canvas {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2px;
+}
+
+/* Cluster selection panel */
+
+$panel-height: 30rem;
+
+#cluster-labels {
+  flex:1
+}
+
+#panel-selector {
+    padding: 0 5px 0 15px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height:0;min-height:100%
+}
+
+$selection-color: grey;
+
+#panel-selector > .btn{
+    flex: 1;
+    padding: 0;
+    font-size: 0.8rem;
+    color:rgb(0, 0, 0);
+    //border-color: $selection-color;
+    background-color: none;
+    margin: 0;
+    opacity: 0.6;
+}
+
+#panel-selector > .btn-selected {
+    background-color: $selection-color;
+    color: black;
+    opacity: 1;
+    border: 1px solid black
+}
+
+#panel-cluster {
+    padding: 5px;
+    height: $panel-height; 
+    overflow: auto;
 }
