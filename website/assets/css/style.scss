@@ -28,10 +28,6 @@
     border-radius: 2px;
 }
 
-/* Cluster selection panel */
-
-$panel-height: 30rem;
-
 #cluster-labels {
   flex:1
 }
@@ -65,9 +61,55 @@ $selection-color: grey;
     border: 1px solid black
 }
 
+/* Bottom info panel */
+
 #panel-cluster {
-    padding: 5px;
+    font-size: smaller;
     width: 100%;
-    height: $panel-height; 
     overflow: auto;
+    gap: 10px;
+
+    > * {
+        padding-top: 10px;
+    }
 }
+
+#panel-cluster-title {
+    font-size: x-large;
+}
+
+#panel-cluster-stats {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+
+    :first-child table {
+        display: table;
+        width: 15rem;
+    }
+
+    :nth-child(2) {
+        flex-grow: 1;
+    }
+
+    :nth-child(2) table{
+        width: 100%;
+        display: table;
+    }
+
+    .panel-table {
+        font-size: smaller;
+        padding: 0.5rem 0rem;
+
+        tr:nth-child(2n) {
+            background-color: #e4e4e4;
+        }
+
+        th {
+            font-size: smaller;
+            background-color: #e4e4e4;
+            padding: 0.5rem 0rem;
+        }
+    }
+}
+
