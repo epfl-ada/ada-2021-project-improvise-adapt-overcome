@@ -57,7 +57,7 @@ function makeButton(cluster, n_clusters) {
 
 function setClusterInfo(cluster, n_clusters) {
   const panel = document.getElementById("panel-cluster");
-  panel.style.display = "block";
+  panel.className = "panel-open";
 
   const panelTitle = document.getElementById("panel-cluster-title");
   panelTitle.innerText = cluster.name;
@@ -67,12 +67,11 @@ function setClusterInfo(cluster, n_clusters) {
   const speakerTable = makeSpeakerTable(cluster.speakers);
 
   panelStats.innerHTML = journalTable + speakerTable;
-  console.log(cluster);
 }
 
 function removeClusterInfo() {
   const panel = document.getElementById("panel-cluster");
-  panel.style.display = "none";
+  panel.className = "panel-closed";
 }
 
 function makeJournalTable(journals) {

@@ -74,13 +74,25 @@ $selection-color: grey;
 #panel-cluster {
     font-size: smaller;
     width: 100%;
-    overflow: auto;
     gap: 10px;
 
     > * {
         padding-top: 10px;
     }
 }
+
+.panel-closed {
+    max-height: 0;
+    transition: max-height 1s ease-out;
+    overflow: hidden
+}
+
+.panel-open {
+    max-height: 5000px;
+    transition: max-height 1s ease-in;
+}
+
+
 
 #panel-cluster-title {
     font-size: x-large;
