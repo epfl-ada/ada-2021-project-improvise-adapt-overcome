@@ -4,23 +4,18 @@ title: A journey into Quotebank communities
 description: An ADA Datastory by Improvise, ADApt, Overcome
 ---
 
-<h1>Introduction</h1>
+{% capture introduction %}{% include introduction.md %}{% endcapture %}
+{{ introduction | markdownify }}
 
-{% include intro.html %}
+{% capture clustering %}{% include clustering.md %}{% endcapture %}
+{{ clustering | markdownify }}
 
-{% include data.html %}
-
-<h1>Relating journals using quotes</h1>
-
-{% include relating_journal.html %}
-
-<h1>Results</h1>
-
-{% include clusters.html %}
+{% capture results %}{% include results.md %}{% endcapture %}
+{{ results | markdownify }}
 
 <h1>Geographical</h1>
 
 {% include map.html %}
 
-<h1>Clusters 3D representation</h1>
+<h1>Individual cluster analysis</h1>
 
