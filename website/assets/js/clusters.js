@@ -2,9 +2,6 @@ import * as THREE from "/assets/js/lib/three.module.js";
 import { OrbitControls } from "/assets/js/lib/OrbitControls.js";
 import { evaluate_cmap } from "/assets/js/lib/js-colormaps.module.js";
 
-const width = 800;
-const height = 800;
-
 let renderer, scene, camera, controls;
 let clustersMap;
 
@@ -29,10 +26,10 @@ function renderClusters(data, element_id) {
   const newspapers = data.map((p) => ({
     name: p.journal,
     cluster_id: parseInt(p.cluster_id),
-    position: [parseFloat(p.x2), parseFloat(p.y2), parseFloat(p.z2)],
+    position: [parseFloat(p.x), parseFloat(p.y), parseFloat(p.z)],
   }));
   const cluster_count =
-    new Set(newspapers.map((p) => p.cluster_id)).size - data.includes(-1);
+    new Set(newspapers.map((p) => p.cluster_id)).size - 1;
   const grouped = groupBy(newspapers, "cluster_id");
 
   // Scene
@@ -50,13 +47,13 @@ function renderClusters(data, element_id) {
   // Clusters
   const sprite = new THREE.TextureLoader().load("/assets/img/dot.png");
 
-  var renderCluster = function (cluster_id, newspapers) {
+  const renderCluster = function (cluster_id, newspapers) {
     const cluster_id_int = parseInt(cluster_id);
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(newspapers.flatMap((np) => np.position));
     const material = new THREE.PointsMaterial({
       map: sprite,
-      alphaTest: 0.1,
+      alphaTest: 0.19,
       transparent: true,
       size: 0.1,
     });
