@@ -97,7 +97,7 @@ function makeJournalTable(journals) {
 
 function makeSpeakerTable(speakers) {
   const header =
-    `<tr><th colspan=3>Top Quotes</th></tr>` +
+    `<tr><th colspan=3>Most quoted speakers</th></tr>` +
     `<tr><th>%</th><th>Speakers</th><th>Description</th></tr>`;
   const itemToString = ([name, title, pct]) =>
     `<td class="center">${(100 * pct).toFixed(
@@ -116,11 +116,11 @@ function makeTable(items, header, itemToString = (x) => `<td>${x}</td>`) {
   return `<div class="panel-table"><table>${tableItems}</table></div>`;
 }
 
-
-
 function makeFeatureImportances(cluster) {
   const clusterFeatures = featureImportance[cluster.cluster_id];
-  clusterFeatures.sort(([_1, w_1],[_2, w_2]) => Math.abs(w_1) - Math.abs(w_2) < 0 ? 1 : -1 ) ;
+  clusterFeatures.sort(([_1, w_1], [_2, w_2]) =>
+    Math.abs(w_1) - Math.abs(w_2) < 0 ? 1 : -1
+  );
   console.log(clusterFeatures);
 
   const maxAbsWeight = Math.abs(clusterFeatures[0][1]);
