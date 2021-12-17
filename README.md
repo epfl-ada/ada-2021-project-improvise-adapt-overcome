@@ -4,7 +4,7 @@ Link to the project: [Improvise, ADApt, Overcome 2021](https://ada2021.sylvainku
 
 ## Title
 
-A journey into Quotebank communities
+Birds of a feather flock together: A deep dive into communities of news outlets in Quotebank
 
 ## Abstract
 
