@@ -1,6 +1,6 @@
 # Conclusion
 
-As hypothesized, we found some meaningful clusters by linking journals together by the individuals they cite. By closer inspection of the top speakers, top journals, quote semantics and key words, it becomes straightforward to label each cluster and understand the category of topics and individuals it englobes. From the journal groupings we generated, we can make the following observations on the Quotebank dataset:
+As hypothesized, we found some meaningful clusters by linking journals together by the individuals they cite. By closer inspection of the top speakers, top journals, quote semantics and key words, it becomes straightforward to label each cluster and understand the category of topics and individuals it englobes. 
 
 ## (Logically) English-speaking media
 English speaking regions represented in Quotebank.
