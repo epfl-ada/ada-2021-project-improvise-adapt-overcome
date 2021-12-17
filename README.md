@@ -83,7 +83,6 @@ The results of our analysis are presented in two interactive graphs. Each graph 
 - The first graph is a 3D projection of our clusters. The reader can click on the cluster labels to show details information about each cluster. The information includes the top news sources, most quoted speakers, and which features best predict the cluster 
 - The second graph maps the news outlets geographically. The user can select which clusters to show on the map.
 
-Finally, we analyse selected clusters in depth, and conclude with the overall insights of our analysis.
 
 ## Timeline
 
