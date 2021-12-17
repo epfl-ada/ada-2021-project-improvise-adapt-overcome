@@ -40,3 +40,9 @@ For a number of groupings, health seems to be a recurring topic. Given the ongoi
 Many government health officials appear in the top speakers of their respective clusters. Some notable individuals include Tedros Adhanom Ghebreyesus (WHO Director-General), and Anthony Fauci (US Medical Advisor). Both are repeatedly cited in several groups.
 
 One can also notice that both are highly cited in the "US Politics" cluster. This is linked to health being a major political subject in 2020, in the United States at least.
+
+## Geography
+
+It is not very surprising that location is the most prevalent defining attribute of communities. Even though news have largely moved online today, it is natural that the stories they cover have remained local.
+
+The visualization lets you explore how communities are distributed around the globe.
