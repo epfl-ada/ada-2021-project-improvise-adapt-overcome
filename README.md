@@ -2,20 +2,23 @@
 
 ## Title
 
-Properties of communities in news outlets in Quotebank
+A journey into Quotebank communities
 
 ## Abstract
 
-The goal of the project is to highlight relationships between newspapers,
-journalists and interviewees.  More precisely, we want to cluster media outlets
-based on who they cite. We will then analyze the attributes of the resulting communities
+News sources today are diverse: newspapers, radio stations, websites and more. They are also widely accessible. The internet has allowed us to collect news from all around the world, covering practically any topic. From anywhere, we can read Russian sports news and hear about the latest celebrity gossip from Argentina.
+
+The goal of this project is to organize these news outlets into communities and then analyze the attributes of the resulting communities
 using external datasets. Some of the factor we want to examine are geolocation,
 interviewees, owner, size, focus, etc.
 
 ## Research questions
 
-- Can we identify groups in Quotebank publishers using the people they cite ? 
-- If there are such groups, what attributes define them ?
+- Can we find a meaningful way to group news outlets?
+- Once found, is there a way to find which attributes characterize these groups?
+- Do some attributes strongly predict how groups are formed?
+- Can we visually convey the identity of such groups?
+
 
 ## Additional datasets
 
@@ -25,11 +28,11 @@ interviewees, owner, size, focus, etc.
 
 ## Methods
 
-- Graph community detection (modularity based methods)
+
 - Kmeans
 - DBScan
-- Page rank
 - Latent Dirichlet Allocation (topic extraction)
+- Classification methods such as Logistic regression or random forest
 
 ## Notebooks
 
@@ -45,6 +48,10 @@ notebooks:
    [`src/clustering.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/clustering.ipynb)
 4. Describing quotes using LDA:
    [`src/lda.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/lda.ipynb)
+5. Semantic analysis of clusters:
+   [`src/semantic_analysis.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/Semantic Analysis.ipynb)
+6. Analysis of cluster features:
+   [`src/features_analysis.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/feature_importance_analysis.ipynb)
 
 ## Data story outline
 
