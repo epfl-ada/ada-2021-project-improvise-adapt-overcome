@@ -32,6 +32,7 @@ interviewees, owner, size, focus, etc.
 - Kmeans
 - DBScan
 - Latent Dirichlet Allocation (topic extraction)
+- Semantic analysis with Empath
 - Classification methods such as Logistic regression or random forest
 
 ## Notebooks
