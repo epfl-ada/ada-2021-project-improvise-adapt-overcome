@@ -1,4 +1,4 @@
-# Let's explore the data!
+# Let's explore the results!
 
 Our clustering method yields 15 clusters, let's explore them! The labels for
 clusters in the following visualizations were picked by hand, based on the
@@ -8,7 +8,7 @@ We first inspect the distribution of news outlets per cluster:
 
 <img alt="Distribution of media per cluster" src="/assets/img/media_percluster.PNG" style="width:80%; display: block; margin: 0 auto">
 
-Now we inspect the distribution of quotes per cluster:
+Quotebank contains mostly english-speaking media, which is reflected. Now we inspect the distribution of quotes per cluster:
 
 <img alt="Distribution of quotes per cluster" src="/assets/img/quotes_percluster.PNG" style="width:80%; display: block; margin: 0 auto">
 
@@ -51,7 +51,7 @@ Amazingly, Donald Trump is a top quoted speaker in 10 of our 15 clusters. In the
 
 In our local clusters, New York and California, he remains in the top 3 cited individuals with around 3% of quotes. Trump is also popular in the international media. He once again appears in the 10 most cited individuals in our journal groupings for Ireland (4th with ~2%), Australia (10th with ~1%), UK (3rd with ~1.5%), India (2nd with ~3%), and Canada (2nd with ~2.5%). 
 
-This shows the wide influence of the former US president. His prevalance in clusters not even directly related to US Politics highlights the profound impact the figure had on the worldwide media landscape. 
+This shows the wide influence of the former US president. His prevalence in clusters not even directly related to US Politics highlights the profound impact the figure had on the worldwide media landscape. 
 
 ## Health
 For a number of groupings, health seems to be a recurring topic. Given the ongoing coronavirus pandemic, a large media interest on sanitary measures and health discussion can be observed. 
