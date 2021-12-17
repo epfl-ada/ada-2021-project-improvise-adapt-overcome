@@ -43,6 +43,10 @@ One can also notice that both are highly cited in the "US Politics" cluster. Thi
 
 ## Geography
 
-It is not very surprising that location is the most prevalent defining attribute of communities. Even though news have largely moved online today, it is natural that the stories they cover have remained local.
+As we have seen above, location is the most prevalent defining attribute of our communities. Indeed, even though news has largely moved online today, it is natural that the stories outlets cover remained local.
 
-The visualization lets you explore how communities are distributed around the globe.
+We found it interesting to plot the locations of our journals on a world map. The visualization below lets you explore how communities are distributed around the globe. For news outlets without a precise location, we use the center of its country of origin.
+
+Using this interactive map, we notice that naming the clusters according to location was indeed a good choice. Clusters named after a location have most of their news outlets in the given location.
+
+What about clusters not named after a location? _Video Games_ and _Celebrities_ are still mainly located in the US and the UK. This is probably because most english-speaking news outlets come from these countries.
