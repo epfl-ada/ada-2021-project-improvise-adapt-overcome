@@ -1,10 +1,7 @@
-# Project outline
+# Birds of a feather flock together: A deep dive into communities of news outlets in Quotebank
 
 Link to the project: [Improvise, ADApt, Overcome 2021](https://ada2021.sylvainkuchen.net)
 
-## Title
-
-Birds of a feather flock together: A deep dive into communities of news outlets in Quotebank
 
 ## Abstract
 
