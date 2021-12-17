@@ -1,5 +1,7 @@
 # Project outline
 
+Link to the project: [Improvise, ADApt, Overcome 2021](ada2021.sylvainkuchen.net)
+
 ## Title
 
 A journey into Quotebank communities
@@ -9,8 +11,9 @@ A journey into Quotebank communities
 News sources today are diverse: newspapers, radio stations, websites and more. They are also widely accessible. The internet has allowed us to collect news from all around the world, covering practically any topic. From anywhere, we can read Russian sports news and hear about the latest celebrity gossip from Argentina.
 
 The goal of this project is to organize these news outlets into communities and then analyze the attributes of the resulting communities
-using external datasets. Some of the factor we want to examine are geolocation,
-interviewees, owner, size, focus, etc.
+using external datasets. Some of the factor we want to examine are geolocation, interviewees, owner, size, focus, etc.
+
+We use the Quotebank dataset to cluster news outlets by the speakers they quoted. Once clustered, we analyse each cluster based on news outlets features extracted from Wikidata. 
 
 ## Research questions
 
@@ -23,23 +26,33 @@ interviewees, owner, size, focus, etc.
 ## Additional datasets
 
 - Wikidata, for publishers and speaker information 
-- A dataset of connecting words, to filter them out when trying to extract the
-  topic out of a quote
 
 ## Methods
 
+Dimentionality reduction to help clustering:
+- Singular Value Decompostition
 
+Clustering algorithms to group news outlets:
 - Kmeans
 - DBScan
+
+Find characteristic attributes from raw Wikidata:
 - Latent Dirichlet Allocation (topic extraction)
 - Semantic analysis with Empath
-- Classification methods such as Logistic regression or random forest
+
+Find cluster predictors:
+- Classification methods such as logistic regression or random forests
+
+Visualization tools for clusters:
+- three.js (3D representation)
+- Leaflet (Geographical representation)
+
 
 ## Notebooks
 
 Our pipeline is split in multiple notebooks:
 
-1. Wikidata URL<->News agency id extraction:
+1. News agency identification and feature extraction from Wikidata:
    [`src/wikidata-handling.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/wikidata-handling.ipynb)
 2. Analysis, transformation and cleaning of Quotebank:
    [`src/handling_quotes_bank.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/handling_quotes_bank.ipynb)
@@ -50,15 +63,27 @@ Our pipeline is split in multiple notebooks:
 5. Semantic analysis of clusters:
    [`src/semantic_analysis.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/semantic_analysis.ipynb)
 6. Analysis of cluster features:
-   [`src/features_analysis.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/feature_importance_analysis.ipynb)
+   [`src/feature_importance_analysis.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/feature_importance_analysis.ipynb)
+
+Additonally, the [`src/utilities`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/tree/master/src/utilities) folder contains notebooks used to generate the data for the datastory visualizations, and python files used as libraries:
+1. Finding journal locations and adding that info to  the cluster file: 
+[`src/utilities/cluster_location.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src//utilities/cluster_location.ipynb)
+2. Finding the top speakers and top journals in each cluster: 
+[`src/utilities/cluster-attributes.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src//utilities/cluster-attributes.ipynb)
+3. Library to find the mean location from a list of coordinates: 
+[`src/utilities/distances.py`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src//utilities/distances.py)
+4. Library to extract data from Wikidata (online/local): 
+[`src/utilities/wiki_helpers.py`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src//utilities/wiki_helpers.py)
 
 ## Data story outline
 
-The main idea is to present the different clusters that we have identified and
-what defines them. We'll have a main visualization of our clusters, followed by
-detailed analysis of some individual clusters. We would like our main
-visualization to be interactive: the user should be able to click on clusters
-and examine their properties.
+Our datastory will first introduce the problem, our research questions and the data. We will briefly detail our methodology along with elementary statistics about the dataset.  
+
+The results of our analysis are presented in two interactive graphs. Each graph is accompanied by short insights we have found about our data.
+- The first graph is a 3D projection of our clusters. The reader can click on the cluster labels to show details information about each cluster. The information includes the top news sources, most quoted speakers, and which features best predict the cluster 
+- The second graph maps the news outlets geographically. The user can select which clusters to show on the map.
+
+Finally, we analyse selected clusters in depth, and conclude with the overall insights of our analysis.
 
 ## Timeline
 
@@ -71,14 +96,7 @@ and examine their properties.
 ## Team organization
 
 Team assignments:
-- Erwan: data cleaning, clustering using graphs
-- Julian: working on page rank, topic extraction
-- Luca: preparing additional datasets and visualisation 
-- Sylvain: clustering (Kmeans, DBScan, ...) and blog
-
-## Questions for TAs
-
-- Using pagerank: how to design the graph on which to apply it ? Is it useful for our goal ?
-- Interactive visualization: any libraries suited for the task ?
-- Do you have any concerns on feasibility ?
-
+- Erwan: data cleaning, feature importance analysis, data story
+- Julian: semantic analysis, lda, data story
+- Luca: wikidata extraction, geographical visualization & cluster properties panel, data story
+- Sylvain: clustering, 3D visualization, data story

@@ -16,7 +16,7 @@ def distance(a, b):
     d_lat = deg2rad(b_lat - a_lat)
     d_lon = deg2rad(b_lon - a_lon)
 
-    a = np.sin(d_lat / 2)**2 + np.cos(deg2rad(lat_a)) * np.cos(deg2rad(lat_b)) * np.sin(d_lon / 2) * np.sin(d_lon / 2)
+    a = np.sin(d_lat / 2)**2 + np.cos(deg2rad(a_lat)) * np.cos(deg2rad(b_lat)) * np.sin(d_lon / 2) * np.sin(d_lon / 2)
     c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
     distance = EARTH_R * c
     return distance
