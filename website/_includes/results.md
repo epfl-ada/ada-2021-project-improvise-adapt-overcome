@@ -16,6 +16,11 @@ An first important observation is that the number of quotes is not entirely corr
 
 <img alt="Average quotes/media per cluster" src="/assets/img/quotes_peroutlet.PNG" style="width:80%; display: block; margin: 0 auto">
 
+Interestingly, the different communities do not cite people at the same rate.
+Gaming news outlet cite the least amount of people. This could be explained by
+the fact that the gaming scene is not personality based. In contrast, more
+traditional outlets like those in the Indian, Australian, US and UK are
+comparatively more likely to cite.
 Let's have a look at our clusters!
 
 {% include clusters.html caption="3D representation of clusters using PCA" %} 
