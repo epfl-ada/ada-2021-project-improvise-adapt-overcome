@@ -40,7 +40,10 @@ function renderMap(clusters, cluster_info) {
   }
 
   // Group cluster markers by cluster_id
-  const markers = clusters.reduce((mks, c) => createMarker(c, mks, icons), {});
+  const markers = clusters.reduce(
+    (mks, c) => createMarker(c, mks, icons, cluster_names),
+    {}
+  );
 
   initMap(n_clusters, markers, cluster_names);
 }
@@ -99,14 +102,19 @@ function initMap(n_clusters, markers, cluster_names) {
  * @param {Object<string, L.divIcon>} icons Dictionary mapping `cluster_id` to a list of `L.divIcon`
  * @returns {Object<string, L.marker>} the old `markers` with `journalEntry` added to its appropriate dictionary entry
  */
-function createMarker({ cluster_id, journal, lat, lon }, markers, icons) {
+function createMarker(
+  { cluster_id, journal, lat, lon },
+  markers,
+  icons,
+  clusterNames
+) {
   // Only allow if lat/lon are not null, undefined, or NaN
   if ((lat || lat === 0) && (lon || lon === 0)) {
     // Create marker object
     const marker = L.marker([lat, lon], {
       icon: icons[cluster_id],
       title: journal,
-    }).bindPopup(createPopup(cluster_id, journal));
+    }).bindPopup(createPopup(cluster_id, journal, clusterNames));
 
     // Save cluster_id in marker for future use
     marker.cluster_id = cluster_id;
@@ -145,12 +153,15 @@ function clusterToRGB(cluster_id, n_clusters) {
  * Creates the HTML popup for a journal marker
  * @param {string} cluster_id ID of the cluster for that journal
  * @param {string} journal URL of the journal
+ * @param {Object<string, string>} cluster_names Dictionary mapping `cluster_id` to its cluster name
  * @returns {Leaflet.popup}
  */
-function createPopup(cluster_id, journal) {
+function createPopup(cluster_id, journal, cluster_names) {
   const popupContent = `<div style="padding-top: 10px;">
       <strong>Journal:</strong> ${journal}</br>
-      <strong>Cluster:</strong> <em>${cluster_id}</em>
+      <strong>Cluster:</strong> <em>${
+        cluster_id === NOCLUSTER_ID ? cluster_id : cluster_names[cluster_id]
+      }</em>
     </div>`;
 
   const popup = L.popup();
