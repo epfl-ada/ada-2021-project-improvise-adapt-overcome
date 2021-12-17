@@ -1,14 +1,14 @@
-body {
-    margin: 10%;
+#cluster-descr {
+    margin-left: 0px ;
 }
-  
+
 #slider {
     position: relative;
-    width: 500px;
-    height: 265px;
-   
+    width: 426px;
+    height: 240px;
+    float: left;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    margin-right: 5px;
 }
 
 #slider ul {
@@ -25,13 +25,12 @@ body {
 #slider ul li {
     position: relative;
     height: 100%;
-   
     float: left;
 }
 
 #slider ul li img{
-    width: 500px;
-    height: 265px;
+    width: 426px;
+    height: 100%;
 }
 
 #slider #prev, #slider #next {
