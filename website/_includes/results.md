@@ -8,7 +8,7 @@ results of our semantic analysis.
 
 Before diving in individual clusters, there are a some interesting observations to be made:
 
-## (Cluster separation
+## Cluster separation
 Unsurprisingly, Quotebank contains english quotes so one could expect english-speaking countries to be heavily represented and discussed. However, we observe a nice geographic separation between our groupings. The biggest english-speaking countries (India, Canada, Australia, Ireland, UK) each have their own cluster. Regarding the United States, we even have a semblance of West/East coast separation as California and New York media have been grouped separately.
 Finally, we also notice cultural and sports groupings which hints that politics and news media have low overlap with journals discussing "leasure" topics (video games, religion, celebrities, sports, ...). 
 
