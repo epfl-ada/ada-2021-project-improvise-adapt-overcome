@@ -47,7 +47,6 @@ the distribution of the number quotes per journal and of the number of different
 ![Log-log plot of the distribution of speakers and quotes](/assets/img/journal_distr.png)
 
 The figure shows that the distributions are heavy tailed. We find heavy tailed distributions in many real world phenomenons, 
-for examples the distribution of city sizes or the distribution of word counts in a text. As our data share a similar distribution 
-with these phenomenons, it is also likely to share other properties with them. For instance, we know that the way we mesure 
-similarity works especially well with text. It is a hint we are in the good direction.
+for examples the distribution of city sizes, of people friends in a network or the distribution of word counts in a text. As our data share a similar distribution with these phenomenons, it is also likely to share other properties with them. For instance, 
+we know that the way we mesure similarity works especially well with text and that real networks have tendency to form local clusters. It is a hint we are in the good direction.
 

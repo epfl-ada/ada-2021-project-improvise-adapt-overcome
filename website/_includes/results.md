@@ -1,4 +1,4 @@
-# Results
+# Let's explore the data!
 
 Our clustering method yields 15 clusters, let's explore them! The labels for
 clusters in the following visualization were picked by hand, based on the
@@ -8,8 +8,9 @@ results of our semantic analysis.
 
 Before diving in individual clusters, there are a some interesting observations to be made:
 
-## (Logically) English-speaking media
-English speaking regions represented in Quotebank.
+## Cluster separation
+Unsurprisingly, Quotebank contains english quotes so one could expect english-speaking countries to be heavily represented and discussed. However, we observe a nice geographic separation between our groupings. The biggest english-speaking countries (India, Canada, Australia, Ireland, UK) each have their own cluster. Regarding the United States, we even have a semblance of West/East coast separation as California and New York media have been grouped separately.
+Finally, we also notice cultural and sports groupings which hints that politics and news media have low overlap with journals discussing "leasure" topics (video games, religion, celebrities, sports, ...). 
 
 ## Insight into the United States
 As a majority of journals included in Quotebank are related to the United States, the groupings related to the country gives us a good insight into American culture. If we make the assumption that media covers the most popular areas of interest of the local population, we can deduce popular aspects of US life. Aside from politics, we observe that religion and celebrities may hold close to the US population. Furthermore, there is a large interest in sports; notably, American football, Basketball, Hockey, Golf, Baseball, and motorsports. We can also infer some of the nation's most popular/known individuals or best athletes by looking at the top speakers. For example, maybe Tiger Woods is one of the best golfers, being number 1 in the "Golf" group. Finally, we can also guess that New York and California are important geographic locations of the country, as they each have a dedicated cluster. Using this information, one can likely use Quotebank to analyze life and politics in the United States due to the abundance of quotes related to the country.
@@ -18,4 +19,4 @@ As a majority of journals included in Quotebank are related to the United States
 Amazingly, Donald Trump is prevalent in many of our groups. In the "religion" cluster, he is even the second most quoted individual, after Pope Francis himself! He has dominated political discussion in the United States for 2020 with around 7% of quotes attributed to him in our "US politics" grouping, with his presidential opponent Joe Biden trailing in second with less than 2% of quotes in comparison. Locally (in our New York and California state groupings) he remains in the top 3 cited individuals with around 3% of quotes. Finally, it seems Trump is also popular in the media internationally, as he once again appears in the 10 most cited individuals in our journal groupings for Ireland (4th with ~2%), Australia (10th with ~1%), UK (3rd with ~1.5%), India (2nd with ~3%), and Canada (2nd with ~2.5%). Once again, the abundance of quotes attributed to Donald Trump would likely allow a thorough analysis of his opinions or political stance using Quotebank.
 
 ## Health
-Health executives in top speakers + health as a predictor, ...
+For a number of groupings, health seems to be a recurring topic. Given the ongoing coronavirus pandemic, a large media interest on sanitary measures and health discussion can be observed. Many government health executives/ministers appear in the top speakers of their respected cluster. Some notable individuals include Tedros Adhanom Ghebreyesus (WHO Director-General), and Anthony Fauci (US Medical Advisor) who are both repeatedly cited in different groups. One can also notice that both are highly cited in the "US Politics" cluster which might indicate that health was a major political subject in 2020 (in the United States at least).

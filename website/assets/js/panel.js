@@ -121,7 +121,6 @@ function makeFeatureImportances(cluster) {
   clusterFeatures.sort(([_1, w_1], [_2, w_2]) =>
     Math.abs(w_1) - Math.abs(w_2) < 0 ? 1 : -1
   );
-  console.log(clusterFeatures);
 
   const maxAbsWeight = Math.abs(clusterFeatures[0][1]);
   //clusterFeatures.reduce(
