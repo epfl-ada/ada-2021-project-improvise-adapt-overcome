@@ -1,4 +1,4 @@
-# Results
+# Cluster exploration
 
 Our clustering method yields 15 clusters, let's explore them! The labels for
 clusters in the following visualization were picked by hand, based on the
