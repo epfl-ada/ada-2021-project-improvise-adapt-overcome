@@ -49,7 +49,7 @@ notebooks:
 4. Describing quotes using LDA:
    [`src/lda.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/lda.ipynb)
 5. Semantic analysis of clusters:
-   [`src/semantic_analysis.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/Semantic Analysis.ipynb)
+   [`src/semantic_analysis.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/semantic_analysis.ipynb)
 6. Analysis of cluster features:
    [`src/features_analysis.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/feature_importance_analysis.ipynb)
 
