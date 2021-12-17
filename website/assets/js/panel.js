@@ -116,16 +116,22 @@ function makeTable(items, header, itemToString = (x) => `<td>${x}</td>`) {
   return `<div class="panel-table"><table>${tableItems}</table></div>`;
 }
 
+
+
 function makeFeatureImportances(cluster) {
   const clusterFeatures = featureImportance[cluster.cluster_id];
-  const maxAbsWeight = clusterFeatures.reduce(
-    (max, [_, w]) => (Math.abs(w) > max ? Math.abs(w) : max),
-    0
-  );
+  clusterFeatures.sort(([_1, w_1],[_2, w_2]) => Math.abs(w_1) - Math.abs(w_2) < 0 ? 1 : -1 ) ;
+  console.log(clusterFeatures);
+
+  const maxAbsWeight = Math.abs(clusterFeatures[0][1]);
+  //clusterFeatures.reduce(
+  //  (max, [_, w]) => (Math.abs(w) > max ? Math.abs(w) : max),
+  //  0
+  //);
 
   let features = "";
   let labels = "";
-  for (let [featureName, weight] of clusterFeatures) {
+  for (let [featureName, weight] of clusterFeatures.slice(0, 20)) {
     const [label, feature] = makeFeatureImportanceBar(
       featureName,
       weight,
