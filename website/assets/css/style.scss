@@ -275,4 +275,43 @@ $selection-color: grey;
     
 }
 
+.authors {
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin-bottom: 2rem;
+    
 
+    .author-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 2rem;
+
+
+        a {
+            display: block;
+            margin-right: 10px;
+        }
+
+    }
+
+    .author-institution {
+        color: grey;
+        font-size: small;
+    }
+    
+    
+}
+
+.site-footer .hr {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    color: grey;
+
+    * {
+        padding-top: 10px;
+        border-top: 1px solid grey ;
+    }
+}

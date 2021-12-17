@@ -23,6 +23,8 @@ function renderMap(clusters, cluster_info) {
     clusters[i].cluster_id = `${cid}`;
   }
 
+  clusters = clusters.filter((x) => x.cluster_id !== NOCLUSTER_ID);
+
   const cluster_names = cluster_info.reduce((acc, { cluster_id, name }) => {
     return { ...acc, [cluster_id]: name };
   }, {});
