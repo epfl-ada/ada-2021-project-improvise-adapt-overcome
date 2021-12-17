@@ -23,6 +23,8 @@ export function initPanel(clusters, featureImportanceByCluster) {
   featureImportance = featureImportanceByCluster;
 }
 
+
+
 function makeButton(cluster, n_clusters) {
   const button = document.createElement("div");
   const color = clusterToRGB(cluster.cluster_id, n_clusters);
@@ -35,6 +37,7 @@ function makeButton(cluster, n_clusters) {
     <div class="btn-label">${cluster.name}</div>
   `;
 
+
   button.onclick = () => {
     if (selected_button_id !== cluster.cluster_id) {
       if (selected_button !== null) {
@@ -43,7 +46,8 @@ function makeButton(cluster, n_clusters) {
       }
 
       button.className = BTN_SELECTED_CLASS;
-
+      console.log(cluster.cluster_id)
+      console.log(button)
       selected_button_id = cluster.cluster_id;
       selected_button = button;
 
