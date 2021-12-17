@@ -71,6 +71,13 @@ $selection-color: grey;
         display: flex;
         align-items: center;
     }
+
+    
+}
+
+.panel-btn:hover {
+    background-color: rgb(228, 228, 228);
+    //font-weight: bold;
 }
 
 .panel-btn-selected {
