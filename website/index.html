@@ -14,7 +14,6 @@ description: An ADA Datastory by Improvise, ADApt, Overcome
 
 {% include map.html %}
 
-<h1>Individual cluster analysis</h1>
-{% include cluster_analysis.html %}
-
+{% capture conclusion %}{% include conclusion.md %}{% endcapture %}
+{{ conclusion | markdownify }}
 
