@@ -37,9 +37,7 @@ interviewees, owner, size, focus, etc.
 
 ## Notebooks
 
-We explore two different ways to identify communities : using vector based
-methods and using network based methods. Our pipeline is split in multiple
-notebooks:
+Our pipeline is split in multiple notebooks:
 
 1. Wikidata URL<->News agency id extraction:
    [`src/wikidata-handling.ipynb`](https://github.com/epfl-ada/ada-2021-project-improvise-adapt-overcome/blob/master/src/wikidata-handling.ipynb)
