@@ -6,15 +6,15 @@ results of our semantic analysis.
 
 We first inspect the distribution of news outlets per cluster:
 
-![Distribution of media per cluster](/assets/img/media_percluster.jpeg)
+![Distribution of media per cluster](/assets/img/media_percluster.PNG)
 
 Now we inspect the distribution of quotes per cluster:
 
-![Distribution of quotes per cluster](/assets/img/quotes_percluster.jpeg)
+![Distribution of quotes per cluster](/assets/img/quotes_percluster.PNG)
 
 An first important observation is that the number of quotes is not entirely correlated with the number of news outlets. For example, although the "Celebrities" cluster has the third most news outlets, it is only 6th for the number of quotes. Let's inspect the average number of quotes per outlet for each cluster instead:
 
-![Average quotes/media per cluster]()
+![Average quotes/media per cluster](/assets/img/quotes_peroutlet.PNG)
 
 Let's have a look at our clusters!
 
