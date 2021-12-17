@@ -1,6 +1,6 @@
 # Project outline
 
-Link to the project: [Improvise, ADApt, Overcome 2021](ada2021.sylvainkuchen.net)
+Link to the project: [Improvise, ADApt, Overcome 2021](https://ada2021.sylvainkuchen.net)
 
 ## Title
 
@@ -30,7 +30,7 @@ We use the Quotebank dataset to cluster news outlets by the speakers they quoted
 ## Methods
 
 Dimentionality reduction to help clustering:
-- Singular Value Decompostition
+- Latent Semantic Analysis
 
 Clustering algorithms to group news outlets:
 - Kmeans
