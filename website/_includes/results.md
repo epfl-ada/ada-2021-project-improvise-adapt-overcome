@@ -1,20 +1,20 @@
 # Let's explore the data!
 
 Our clustering method yields 15 clusters, let's explore them! The labels for
-clusters in the following visualization were picked by hand, based on the
+clusters in the following visualizations were picked by hand, based on the
 results of our semantic analysis.
 
 We first inspect the distribution of news outlets per cluster:
 
-![Distribution of media per cluster](/assets/img/media_percluster.PNG)
+<img alt="Distribution of media per cluster" src="/assets/img/media_percluster.PNG" style="width:80%; display: block; margin: 0 auto">
 
 Now we inspect the distribution of quotes per cluster:
 
-![Distribution of quotes per cluster](/assets/img/quotes_percluster.PNG)
+<img alt="Distribution of quotes per cluster" src="/assets/img/quotes_percluster.PNG" style="width:80%; display: block; margin: 0 auto">
 
 An first important observation is that the number of quotes is not entirely correlated with the number of news outlets. For example, although the "Celebrities" cluster has the third most news outlets, it is only 6th for the number of quotes. Let's inspect the average number of quotes per outlet for each cluster instead:
 
-![Average quotes/media per cluster](/assets/img/quotes_peroutlet.PNG)
+<img alt="Average quotes/media per cluster" src="/assets/img/quotes_peroutlet.PNG" style="width:80%; display: block; margin: 0 auto">
 
 Let's have a look at our clusters!
 
